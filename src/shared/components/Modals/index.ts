@@ -1,2 +1,2 @@
-export { default as Modal } from './Modal';
-export { default as RegisterModal } from './RegisterModal';
+export { default as Modal } from './Modal/Modal';
+export { default as RegisterModal } from './RegisterModal/RegisterModal';
