@@ -3,12 +3,15 @@
 import { useCallback, useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 
-import { Avatar, MenuLink } from '../..';
+import { Avatar, MenuItem, MenuLink } from '../..';
 import { navLinks } from './navLinks';
+import { useRegisterModal } from '@/store/useRegisterModal';
 
 export type UserMenuProps = {};
 
 const UserMenu: React.FC<UserMenuProps> = () => {
+  const onOpenRegisterModal = useRegisterModal(s => s.onOpen);
+
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = useCallback(() => {
     setIsOpen(prev => !prev);
@@ -36,9 +39,11 @@ const UserMenu: React.FC<UserMenuProps> = () => {
       {isOpen && (
         <div className="absolute rounded-xl shadow-md w-[30vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm">
           <div className="flex flex-col cursor-pointer">
-            {navLinks.map(({ label, path }) => (
+            {/* {navLinks.map(({ label, path }) => (
               <MenuLink key={path} label={label} path={path} />
-            ))}
+            ))} */}
+            <MenuItem label="Login" onClick={() => {}} />
+            <MenuItem label="Sign up" onClick={onOpenRegisterModal} />
           </div>
         </div>
       )}
