@@ -31,7 +31,7 @@ model User {
   reservations Reservation[]
 }
 
-// social login requires this model
+// social login requires this model   <--   Next Auth
 model Account {
   id                String  @id @default(auto()) @map("_id") @db.ObjectId
   userId            String  @db.ObjectId
