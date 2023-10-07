@@ -43,8 +43,7 @@ const RegisterModal: React.FC<RegisterModalProps> = () => {
         onClose();
       })
       .catch(err => {
-        console.log(err);
-        toast.error('Something went wrong');
+        toast.error(err?.response.data.error || 'Something went wrong');
       })
       .finally(() => {
         setIsLoading(false);

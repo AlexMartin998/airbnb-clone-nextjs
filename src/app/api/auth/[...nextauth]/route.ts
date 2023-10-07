@@ -37,9 +37,7 @@ const authOptions: AuthOptions = {
         }
 
         const user = await db.user.findUnique({
-          where: {
-            email: credentials.email,
-          },
+          where: { email: credentials.email },
         });
         if (!user || !user?.hashedPassword)
           throw new Error('Invalid credentials');
