@@ -11,6 +11,7 @@ import { registerFormSchema } from '@/shared/utils';
 import { airbnbApi } from '@/shared/lib';
 import { Modal } from '..';
 import { Button, Heading, Input } from '../..';
+import toast from 'react-hot-toast';
 
 export type RegisterModalProps = {};
 
@@ -43,6 +44,7 @@ const RegisterModal: React.FC<RegisterModalProps> = () => {
       })
       .catch(err => {
         console.log(err);
+        toast.error('Something went wrong');
       })
       .finally(() => {
         setIsLoading(false);
