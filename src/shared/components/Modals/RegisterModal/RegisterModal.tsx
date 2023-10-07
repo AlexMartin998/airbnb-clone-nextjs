@@ -10,7 +10,7 @@ import { useRegisterModal } from '@/store/useRegisterModal';
 import { registerFormSchema } from '@/shared/utils';
 import { airbnbApi } from '@/shared/lib';
 import { Modal } from '..';
-import { Heading, Input } from '../..';
+import { Button, Heading, Input } from '../..';
 
 export type RegisterModalProps = {};
 
@@ -49,7 +49,9 @@ const RegisterModal: React.FC<RegisterModalProps> = () => {
       });
   };
 
-  console.log(errors);
+  const onToggle = useCallback(() => {
+    onClose();
+  }, [onClose]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -82,6 +84,36 @@ const RegisterModal: React.FC<RegisterModalProps> = () => {
     </div>
   );
 
+  const footerContent = (
+    <div className="flex flex-col gap-4 mt-3">
+      <hr />
+      <Button
+        outline
+        label="Continue with Google"
+        icon={FcGoogle}
+        onClick={() => {}}
+      />
+      <Button
+        outline
+        label="Continue with Github"
+        icon={AiFillGithub}
+        onClick={() => {}}
+      />
+      <div className="text-neutral-500 text-center mt-4 font-light">
+        <p>
+          Already have an account?
+          <span
+            onClick={onToggle}
+            className="text-neutral-800 cursor-pointer hover:underline"
+          >
+            {' '}
+            Log in
+          </span>
+        </p>
+      </div>
+    </div>
+  );
+
   return (
     <Modal
       disabled={isLoading}
@@ -91,7 +123,7 @@ const RegisterModal: React.FC<RegisterModalProps> = () => {
       onClose={onClose}
       onSubmit={handleSubmit(onRegister)}
       body={bodyContent}
-      // footer={footerContent}
+      footer={footerContent}
     />
   );
 };
