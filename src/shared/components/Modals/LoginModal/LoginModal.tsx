@@ -50,7 +50,7 @@ const LoginModal: React.FC<LoginModalProps> = () => {
         onClose();
       }
       if (cb?.error) {
-        console.log(cb.error);
+        // console.log(cb.error);
         toast.error(
           'There was a problem logging in. Check your email and password or create an account.'
         );

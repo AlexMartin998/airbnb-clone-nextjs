@@ -68,8 +68,6 @@ const RentModal: React.FC<RentModalProps> = () => {
       shouldDirty: true,
       shouldTouch: true,
     });
-
-    console.log(getValues());
   };
 
   // // // steps
