@@ -1,7 +1,13 @@
 import dynamic from 'next/dynamic';
 import { useMemo } from 'react';
 
-import { CategoryInput, Counter, CountrySelect, Heading } from '../..';
+import {
+  CategoryInput,
+  Counter,
+  CountrySelect,
+  Heading,
+  ImageUpload,
+} from '../..';
 import { STEPS } from './RentModal';
 
 export type BodyContentProps = {
@@ -81,6 +87,21 @@ const BodyContent: React.FC<BodyContentProps> = ({
       </div>
     );
 
+  if (currentStep === STEPS.IMAGES)
+    return (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Add a photo of your place"
+          subtitle="Show guests what your place looks like!"
+        />
+        <ImageUpload
+          onChange={value => setCustomValue('imageSrc', value)}
+          value={imageSrcInput}
+        />
+      </div>
+    );
+
+  // first step
   return (
     <div className="flex flex-col gap-8">
       <Heading

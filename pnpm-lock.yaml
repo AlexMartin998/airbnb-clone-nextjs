@@ -29,6 +29,9 @@ dependencies:
   next-auth:
     specifier: ^4.23.2
     version: 4.23.2(next@13.5.4)(react-dom@18.2.0)(react@18.2.0)
+  next-cloudinary:
+    specifier: ^4.23.1
+    version: 4.23.1(next@13.5.4)(react@18.2.0)
   query-string:
     specifier: ^8.1.0
     version: 8.1.0
@@ -160,6 +163,29 @@ packages:
       '@babel/helper-string-parser': 7.22.5
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
+    dev: false
+
+  /@cloudinary-util/url-loader@3.10.0:
+    resolution: {integrity: sha512-RNp6WayU6e5ikA7yCRqNhp0lOwLl82vLco9EwpES2si6Hb+g9yEaeTYvobD44ISQeJUnPl6e1c/AEYVSjfzwrg==}
+    dependencies:
+      '@cloudinary-util/util': 2.2.1
+      '@cloudinary/url-gen': 1.11.2
+    dev: false
+
+  /@cloudinary-util/util@2.2.1:
+    resolution: {integrity: sha512-MEIqn5WtPP3mxSMTNNfpqlGS1UquAXcjmVdY/t/edD/ZWVjI85viBiOMIuF0W6n6UF5gTstLymfQNYx0YO/GZg==}
+    dev: false
+
+  /@cloudinary/transformation-builder-sdk@1.6.1:
+    resolution: {integrity: sha512-cBoSFbE4SnXO2QvUq+cYgUpXufmZTgg05Cy+jAdiNRGcC6lN+KO0ybMnLU6yg9cFub2NRkBDpU4N53wg4a977w==}
+    dependencies:
+      '@cloudinary/url-gen': 1.11.2
+    dev: false
+
+  /@cloudinary/url-gen@1.11.2:
+    resolution: {integrity: sha512-9yL3BlThh3PfyRg/zS8cQVic3FdFaIOp361YrDrQ4fqYbYE47SGWF4ji9KoFxYF4ejfDEptayeG9jF2C465KRQ==}
+    dependencies:
+      '@cloudinary/transformation-builder-sdk': 1.6.1
     dev: false
 
   /@emotion/babel-plugin@11.11.0:
@@ -2390,6 +2416,18 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       uuid: 8.3.2
+    dev: false
+
+  /next-cloudinary@4.23.1(next@13.5.4)(react@18.2.0):
+    resolution: {integrity: sha512-92Nq5PWtp12QmS6NkP7kxu2stN1iBrHuPzIlag/b2oeED5wdAVdqta2rAEUoipL4VpE0lPYcKsoVa/EWfFvmXQ==}
+    peerDependencies:
+      next: ^12 || ^13
+      react: ^17 || ^18
+    dependencies:
+      '@cloudinary-util/url-loader': 3.10.0
+      '@cloudinary-util/util': 2.2.1
+      next: 13.5.4(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
     dev: false
 
   /next@13.5.4(react-dom@18.2.0)(react@18.2.0):

@@ -112,6 +112,14 @@ const RentModal: React.FC<RentModalProps> = () => {
         roomCountInput={roomCount}
       />
     );
+  if (step === STEPS.IMAGES)
+    bodyContent = (
+      <BodyContent
+        currentStep={STEPS.IMAGES}
+        setCustomValue={setCustomValue}
+        imageSrcInput={imageSrc}
+      />
+    );
 
   return (
     <Modal
