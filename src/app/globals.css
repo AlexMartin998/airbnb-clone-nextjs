@@ -19,3 +19,26 @@
 body {
   height: 100%;
 }
+
+/* Estilizar el scrollbar horizontal para una apariencia más elegante */
+
+/* Estilizar el track (fondo del scrollbar) */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px; /* Ancho del scrollbar horizontal */
+  height: 6px; /* Altura del scrollbar horizontal */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f5f5f5; /* Color de fondo del track (fondo) */
+  border-radius: 6px; /* Borde redondeado del track */
+}
+
+/* Estilizar el thumb (barra de desplazamiento) */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888; /* Color del thumb (barra de desplazamiento) */
+  border-radius: 6px; /* Borde redondeado del thumb */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #777; /* Color del thumb cuando se pasa el ratón por encima */
+}
