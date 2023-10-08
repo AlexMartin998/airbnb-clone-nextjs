@@ -2,9 +2,14 @@ import type { Metadata } from 'next';
 import { Nunito } from 'next/font/google';
 import './globals.css';
 
-import { LoginModal, Navbar, RegisterModal } from '@/shared/components';
-import { ToasterProvider } from '@/shared/components/providers/ToasterProvider';
 import { getCurrentUser } from '@/auth/actions';
+import {
+  LoginModal,
+  Navbar,
+  RegisterModal,
+  RentModal,
+} from '@/shared/components';
+import { ToasterProvider } from '@/shared/components/providers/ToasterProvider';
 
 const nunito = Nunito({ subsets: ['latin'] });
 
@@ -26,6 +31,7 @@ export default async function RootLayout({
         <Navbar currentUser={currentUser} />
         <RegisterModal />
         <LoginModal />
+        <RentModal />
         <ToasterProvider />
 
         {children}

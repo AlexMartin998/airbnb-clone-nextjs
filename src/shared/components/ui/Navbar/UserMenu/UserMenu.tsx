@@ -7,6 +7,7 @@ import { AiOutlineMenu } from 'react-icons/ai';
 import { SafeUser } from '@/shared/types';
 import { useLoginModal } from '@/store/useLoginModal';
 import { useRegisterModal } from '@/store/useRegisterModal';
+import useRentModal from '@/store/useRentModal';
 import { Avatar, MenuItem, MenuLink } from '../..';
 import { navLinks } from './navLinks';
 
@@ -17,16 +18,28 @@ export type UserMenuProps = {
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const onOpenRegisterModal = useRegisterModal(s => s.onOpen);
   const onOpenLoginModal = useLoginModal(s => s.onOpen);
+  const onOpenRentModal = useRentModal(s => s.onOpen);
 
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = useCallback(() => {
     setIsOpen(prev => !prev);
   }, []);
 
+  // handle rent logic
+  const onRent = useCallback(() => {
+    if (!currentUser) return onOpenLoginModal();
+
+    // open rent modal
+    onOpenRentModal();
+  }, [currentUser, onOpenLoginModal, onOpenRentModal]);
+
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
-        <div className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer">
+        <div
+          onClick={onRent}
+          className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
+        >
           Airbnb your home
         </div>
 
@@ -50,6 +63,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                 {navLinks.map(({ label, path }) => (
                   <MenuLink key={path} label={label} path={path} />
                 ))}
+                <MenuItem label="Airbnb your home" onClick={onOpenRentModal} className='text-start' />
                 <hr />
                 <MenuItem label="Logout" onClick={() => signOut()} />
               </>
