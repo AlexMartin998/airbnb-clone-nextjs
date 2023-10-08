@@ -7,6 +7,7 @@ import {
   CountrySelect,
   Heading,
   ImageUpload,
+  Input,
 } from '../..';
 import { STEPS } from './RentModal';
 
@@ -20,6 +21,9 @@ export type BodyContentProps = {
   bathroomCountInput?: any;
   imageSrcInput?: any;
   setCustomValue: (id: string, value: any) => void;
+  isLoading?: boolean;
+  register?: any;
+  errors?: any;
 };
 
 const BodyContent: React.FC<BodyContentProps> = ({
@@ -32,6 +36,9 @@ const BodyContent: React.FC<BodyContentProps> = ({
   imageSrcInput,
   roomCountInput,
   setCustomValue,
+  isLoading,
+  register,
+  errors,
 }) => {
   // to use this map in ssr & react
   const Map = useMemo(
@@ -97,6 +104,53 @@ const BodyContent: React.FC<BodyContentProps> = ({
         <ImageUpload
           onChange={value => setCustomValue('imageSrc', value)}
           value={imageSrcInput}
+        />
+      </div>
+    );
+
+  if (currentStep === STEPS.DESCRIPTION)
+    return (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="How would you describe your place?"
+          subtitle="Short and sweet works best!"
+        />
+        <Input
+          id="title"
+          label="Title"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+        <hr />
+        <Input
+          id="description"
+          label="Description"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+      </div>
+    );
+
+  if (currentStep === STEPS.PRICE)
+    return (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Now, set your price"
+          subtitle="How much do you charge per night?"
+        />
+        <Input
+          id="price"
+          label="Price"
+          formatPrice
+          type="number"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
         />
       </div>
     );

@@ -7,6 +7,7 @@ import useRentModal from '@/store/useRentModal';
 import { Modal } from '..';
 import { categories } from '../../ui/Navbar/Categories/categories';
 import BodyContent from './BodyContent';
+import { Heading, Input } from '../..';
 
 export type RentModalProps = {};
 
@@ -118,6 +119,26 @@ const RentModal: React.FC<RentModalProps> = () => {
         currentStep={STEPS.IMAGES}
         setCustomValue={setCustomValue}
         imageSrcInput={imageSrc}
+      />
+    );
+  if (step === STEPS.DESCRIPTION)
+    bodyContent = (
+      <BodyContent
+        currentStep={STEPS.DESCRIPTION}
+        setCustomValue={setCustomValue}
+        isLoading={isLoading}
+        register={register}
+        errors={errors}
+      />
+    );
+  if (step === STEPS.PRICE)
+    bodyContent = (
+      <BodyContent
+        currentStep={STEPS.PRICE}
+        setCustomValue={setCustomValue}
+        isLoading={isLoading}
+        register={register}
+        errors={errors}
       />
     );
 
