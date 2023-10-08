@@ -9,6 +9,7 @@ import { FcGoogle } from 'react-icons/fc';
 
 import { airbnbApi } from '@/shared/lib';
 import { registerFormSchema } from '@/shared/utils';
+import { useLoginModal } from '@/store/useLoginModal';
 import { useRegisterModal } from '@/store/useRegisterModal';
 import toast from 'react-hot-toast';
 import { Modal } from '..';
@@ -25,6 +26,7 @@ type FormData = {
 const RegisterModal: React.FC<RegisterModalProps> = () => {
   const isOpen = useRegisterModal(s => s.isOpen);
   const onClose = useRegisterModal(s => s.onClose);
+  const onOpenLogin = useLoginModal(s => s.onOpen);
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -53,7 +55,8 @@ const RegisterModal: React.FC<RegisterModalProps> = () => {
 
   const onToggle = useCallback(() => {
     onClose();
-  }, [onClose]);
+    onOpenLogin();
+  }, [onClose, onOpenLogin]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
