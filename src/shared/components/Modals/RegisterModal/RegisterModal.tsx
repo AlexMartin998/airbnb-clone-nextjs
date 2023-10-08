@@ -6,12 +6,12 @@ import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AiFillGithub } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
+import toast from 'react-hot-toast';
 
 import { airbnbApi } from '@/shared/lib';
 import { registerFormSchema } from '@/shared/utils';
 import { useLoginModal } from '@/store/useLoginModal';
 import { useRegisterModal } from '@/store/useRegisterModal';
-import toast from 'react-hot-toast';
 import { Modal } from '..';
 import { Button, Heading, Input } from '../..';
 

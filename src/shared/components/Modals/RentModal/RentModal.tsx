@@ -1,13 +1,15 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
-import { FieldValues, useForm } from 'react-hook-form';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
+import { airbnbApi } from '@/shared/lib';
 import useRentModal from '@/store/useRentModal';
 import { Modal } from '..';
 import { categories } from '../../ui/Navbar/Categories/categories';
 import BodyContent from './BodyContent';
-import { Heading, Input } from '../..';
 
 export type RentModalProps = {};
 
@@ -23,6 +25,7 @@ export enum STEPS {
 const RentModal: React.FC<RentModalProps> = () => {
   const [step, setStep] = useState(STEPS.CATEGORY);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const isOpen = useRentModal(s => s.isOpen);
   const onClose = useRentModal(s => s.onClose);
@@ -58,7 +61,7 @@ const RentModal: React.FC<RentModalProps> = () => {
   const bathroomCount = watch('bathroomCount');
   const imageSrc = watch('imageSrc');
 
-  // // to set values and init a re-render  <--  react-hook-form
+  // // to set values in form  <--  react-hook-form
   const setCustomValue = (id: string, value: any): void => {
     setValue(id, value, {
       shouldValidate: true, // the most importnat
@@ -142,13 +145,35 @@ const RentModal: React.FC<RentModalProps> = () => {
       />
     );
 
+  // // // save/submit
+  const onSubmit: SubmitHandler<FieldValues> = data => {
+    if (step !== STEPS.PRICE) return onNext();
+    setIsLoading(true);
+
+    airbnbApi
+      .post('/listings', data)
+      .then(() => {
+        toast.success('Listing created!');
+        router.refresh();
+        reset();
+        setStep(STEPS.CATEGORY);
+        onClose();
+      })
+      .catch(() => {
+        toast.error('Something went wrong.');
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
   return (
     <Modal
       disabled={isLoading}
       isOpen={isOpen}
       title="Airbnb your home!"
       actionLabel={actionLabel}
-      onSubmit={onNext}
+      onSubmit={handleSubmit(onSubmit)}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
       onClose={onClose}
