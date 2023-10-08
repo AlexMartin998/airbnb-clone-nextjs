@@ -59,7 +59,6 @@ const RentModal: React.FC<RentModalProps> = () => {
 
   // // to set values and init a re-render  <--  react-hook-form
   const setCustomValue = (id: string, value: any): void => {
-
     setValue(id, value, {
       shouldValidate: true, // the most importnat
       shouldDirty: true,
@@ -67,7 +66,6 @@ const RentModal: React.FC<RentModalProps> = () => {
     });
 
     console.log(getValues());
-
   };
 
   // // // steps
@@ -95,6 +93,14 @@ const RentModal: React.FC<RentModalProps> = () => {
       setCustomValue={setCustomValue}
     />
   );
+  if (step === STEPS.LOCATION)
+    bodyContent = (
+      <BodyContent
+        currentStep={STEPS.LOCATION}
+        locationInput={location}
+        setCustomValue={setCustomValue}
+      />
+    );
 
   return (
     <Modal
@@ -102,7 +108,7 @@ const RentModal: React.FC<RentModalProps> = () => {
       isOpen={isOpen}
       title="Airbnb your home!"
       actionLabel={actionLabel}
-      onSubmit={() => {}}
+      onSubmit={onNext}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
       onClose={onClose}

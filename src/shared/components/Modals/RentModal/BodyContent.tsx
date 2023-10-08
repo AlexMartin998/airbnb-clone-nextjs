@@ -1,10 +1,11 @@
-import { CategoryInput, Heading } from '../..';
+import { CategoryInput, CountrySelect, Heading } from '../..';
 import { STEPS } from './RentModal';
 
 export type BodyContentProps = {
   currentStep?: STEPS;
   categories?: any[];
   categoryInput?: any;
+  locationInput?: any;
   setCustomValue?: (id: string, value: any) => void;
 };
 
@@ -12,8 +13,25 @@ const BodyContent: React.FC<BodyContentProps> = ({
   currentStep,
   categories,
   categoryInput,
+  locationInput,
   setCustomValue,
 }) => {
+  if (currentStep === STEPS.LOCATION)
+    return (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Where is your place located?"
+          subtitle="Help guests find you!"
+        />
+
+        <div>Country select</div>
+        <CountrySelect
+          value={locationInput}
+          onChange={value => setCustomValue!('location', value)}
+        />
+      </div>
+    );
+
   return (
     <div className="flex flex-col gap-8">
       <Heading
