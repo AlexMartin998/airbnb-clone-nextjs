@@ -1,3 +1,6 @@
+import dynamic from 'next/dynamic';
+import { useMemo } from 'react';
+
 import { CategoryInput, CountrySelect, Heading } from '../..';
 import { STEPS } from './RentModal';
 
@@ -16,6 +19,13 @@ const BodyContent: React.FC<BodyContentProps> = ({
   locationInput,
   setCustomValue,
 }) => {
+  // to use this map in ssr & react
+  const Map = useMemo(
+    () => dynamic(() => import('./../../Map/Map'), { ssr: false }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [locationInput]
+  );
+
   if (currentStep === STEPS.LOCATION)
     return (
       <div className="flex flex-col gap-8">
@@ -24,11 +34,12 @@ const BodyContent: React.FC<BodyContentProps> = ({
           subtitle="Help guests find you!"
         />
 
-        <div>Country select</div>
         <CountrySelect
           value={locationInput}
           onChange={value => setCustomValue!('location', value)}
         />
+
+        <Map center={locationInput?.latlng} />
       </div>
     );
 
