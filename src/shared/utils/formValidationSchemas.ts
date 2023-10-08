@@ -25,3 +25,8 @@ export const registerFormSchema = yup.object({
   email: emailYupValidation,
   password: passwordYupValidation,
 });
+
+export const loginFormSchema = yup.object({
+  email: emailYupValidation,
+  password: passwordYupValidation,
+});

@@ -6,11 +6,13 @@ import { AiOutlineMenu } from 'react-icons/ai';
 import { Avatar, MenuItem, MenuLink } from '../..';
 import { navLinks } from './navLinks';
 import { useRegisterModal } from '@/store/useRegisterModal';
+import { useLoginModal } from '@/store/useLoginModal';
 
 export type UserMenuProps = {};
 
 const UserMenu: React.FC<UserMenuProps> = () => {
   const onOpenRegisterModal = useRegisterModal(s => s.onOpen);
+  const onOpenLoginModal = useLoginModal(s => s.onOpen);
 
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = useCallback(() => {
@@ -42,7 +44,7 @@ const UserMenu: React.FC<UserMenuProps> = () => {
             {/* {navLinks.map(({ label, path }) => (
               <MenuLink key={path} label={label} path={path} />
             ))} */}
-            <MenuItem label="Login" onClick={() => {}} />
+            <MenuItem label="Login" onClick={onOpenLoginModal} />
             <MenuItem label="Sign up" onClick={onOpenRegisterModal} />
           </div>
         </div>
