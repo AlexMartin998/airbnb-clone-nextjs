@@ -1,17 +1,18 @@
 'use client';
 
-import { AiFillGithub } from 'react-icons/ai';
-import { FcGoogle } from 'react-icons/fc';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { signIn } from 'next-auth/react';
 import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { AiFillGithub } from 'react-icons/ai';
+import { FcGoogle } from 'react-icons/fc';
 
-import { useRegisterModal } from '@/store/useRegisterModal';
-import { registerFormSchema } from '@/shared/utils';
 import { airbnbApi } from '@/shared/lib';
+import { registerFormSchema } from '@/shared/utils';
+import { useRegisterModal } from '@/store/useRegisterModal';
+import toast from 'react-hot-toast';
 import { Modal } from '..';
 import { Button, Heading, Input } from '../..';
-import toast from 'react-hot-toast';
 
 export type RegisterModalProps = {};
 
@@ -98,7 +99,7 @@ const RegisterModal: React.FC<RegisterModalProps> = () => {
         outline
         label="Continue with Github"
         icon={AiFillGithub}
-        onClick={() => {}}
+        onClick={() => signIn('github')}
       />
       <div className="text-neutral-500 text-center mt-4 font-light">
         <p>
