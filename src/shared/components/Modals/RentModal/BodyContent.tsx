@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import { useMemo } from 'react';
 
-import { CategoryInput, CountrySelect, Heading } from '../..';
+import { CategoryInput, Counter, CountrySelect, Heading } from '../..';
 import { STEPS } from './RentModal';
 
 export type BodyContentProps = {
@@ -9,7 +9,11 @@ export type BodyContentProps = {
   categories?: any[];
   categoryInput?: any;
   locationInput?: any;
-  setCustomValue?: (id: string, value: any) => void;
+  guestCountInput?: any;
+  roomCountInput?: any;
+  bathroomCountInput?: any;
+  imageSrcInput?: any;
+  setCustomValue: (id: string, value: any) => void;
 };
 
 const BodyContent: React.FC<BodyContentProps> = ({
@@ -17,6 +21,10 @@ const BodyContent: React.FC<BodyContentProps> = ({
   categories,
   categoryInput,
   locationInput,
+  bathroomCountInput,
+  guestCountInput,
+  imageSrcInput,
+  roomCountInput,
   setCustomValue,
 }) => {
   // to use this map in ssr & react
@@ -36,10 +44,40 @@ const BodyContent: React.FC<BodyContentProps> = ({
 
         <CountrySelect
           value={locationInput}
-          onChange={value => setCustomValue!('location', value)}
+          onChange={value => setCustomValue('location', value)}
         />
 
         <Map center={locationInput?.latlng} />
+      </div>
+    );
+
+  if (currentStep === STEPS.INFO)
+    return (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Share some basics about your place"
+          subtitle="What amenitis do you have?"
+        />
+        <Counter
+          onChange={value => setCustomValue('guestCount', value)}
+          value={guestCountInput}
+          title="Guests"
+          subtitle="How many guests do you allow?"
+        />
+        <hr />
+        <Counter
+          onChange={value => setCustomValue('roomCount', value)}
+          value={roomCountInput}
+          title="Rooms"
+          subtitle="How many rooms do you have?"
+        />
+        <hr />
+        <Counter
+          onChange={value => setCustomValue('bathroomCount', value)}
+          value={bathroomCountInput}
+          title="Bathrooms"
+          subtitle="How many bathrooms do you have?"
+        />
       </div>
     );
 
@@ -54,7 +92,7 @@ const BodyContent: React.FC<BodyContentProps> = ({
         {categories!.map(item => (
           <div key={item.label} className="col-span-1">
             <CategoryInput
-              onClick={category => setCustomValue!('category', category)}
+              onClick={category => setCustomValue('category', category)}
               selected={categoryInput === item.label}
               label={item.label}
               icon={item.icon}

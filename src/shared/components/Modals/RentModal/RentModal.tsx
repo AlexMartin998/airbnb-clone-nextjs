@@ -21,7 +21,7 @@ export enum STEPS {
 
 const RentModal: React.FC<RentModalProps> = () => {
   const [step, setStep] = useState(STEPS.CATEGORY);
-  const [isLoading, setIsLoadifirst] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const isOpen = useRentModal(s => s.isOpen);
   const onClose = useRentModal(s => s.onClose);
@@ -99,6 +99,17 @@ const RentModal: React.FC<RentModalProps> = () => {
         currentStep={STEPS.LOCATION}
         locationInput={location}
         setCustomValue={setCustomValue}
+      />
+    );
+  if (step === STEPS.INFO)
+    bodyContent = (
+      <BodyContent
+        currentStep={STEPS.INFO}
+        locationInput={location}
+        setCustomValue={setCustomValue}
+        guestCountInput={guestCount}
+        bathroomCountInput={bathroomCount}
+        roomCountInput={roomCount}
       />
     );
 
