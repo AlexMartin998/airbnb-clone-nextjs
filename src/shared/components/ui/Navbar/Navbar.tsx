@@ -1,7 +1,7 @@
 'use client';
 
 import { SafeUser } from '@/shared/types';
-import { Container, Logo, Search, UserMenu } from '..';
+import { Categories, Container, Logo, Search, UserMenu } from '..';
 
 export type NavbarProps = {
   currentUser?: SafeUser | null;
@@ -21,6 +21,8 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
           </div>
         </Container>
       </div>
+
+      <Categories />
     </div>
   );
 };

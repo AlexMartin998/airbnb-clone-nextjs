@@ -1,3 +1,4 @@
+export { default as Categories } from './Categories/Categories';
 export { default as Logo } from './Logo/Logo';
 export { default as MenuItem } from './MenuItem/MenuItem';
 export { default as MenuLink } from './MenuLink/MenuLink';
