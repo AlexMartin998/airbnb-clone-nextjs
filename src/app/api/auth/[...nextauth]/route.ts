@@ -8,7 +8,7 @@ import GoogleProvider from 'next-auth/providers/google';
 
 import { db } from '@/shared/lib/prismadb';
 
-const authOptions: AuthOptions = {
+export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(db),
 
   providers: [

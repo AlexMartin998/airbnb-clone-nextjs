@@ -1,16 +1,20 @@
 'use client';
 
+import { signOut } from 'next-auth/react';
 import { useCallback, useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 
+import { SafeUser } from '@/shared/types';
+import { useLoginModal } from '@/store/useLoginModal';
+import { useRegisterModal } from '@/store/useRegisterModal';
 import { Avatar, MenuItem, MenuLink } from '../..';
 import { navLinks } from './navLinks';
-import { useRegisterModal } from '@/store/useRegisterModal';
-import { useLoginModal } from '@/store/useLoginModal';
 
-export type UserMenuProps = {};
+export type UserMenuProps = {
+  currentUser?: SafeUser | null;
+};
 
-const UserMenu: React.FC<UserMenuProps> = () => {
+const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const onOpenRegisterModal = useRegisterModal(s => s.onOpen);
   const onOpenLoginModal = useLoginModal(s => s.onOpen);
 
@@ -41,11 +45,28 @@ const UserMenu: React.FC<UserMenuProps> = () => {
       {isOpen && (
         <div className="absolute rounded-xl shadow-md w-[30vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm">
           <div className="flex flex-col cursor-pointer">
-            {/* {navLinks.map(({ label, path }) => (
-              <MenuLink key={path} label={label} path={path} />
-            ))} */}
-            <MenuItem label="Login" onClick={onOpenLoginModal} />
-            <MenuItem label="Sign up" onClick={onOpenRegisterModal} />
+            {currentUser ? (
+              <>
+                {navLinks.map(({ label, path }) => (
+                  <MenuLink key={path} label={label} path={path} />
+                ))}
+                <hr />
+                <MenuItem label="Logout" onClick={() => signOut()} />
+              </>
+            ) : (
+              <>
+                <MenuItem
+                  label="Login"
+                  onClick={onOpenLoginModal}
+                  className="text-start font-normal"
+                />
+                <MenuItem
+                  label="Sign up"
+                  onClick={onOpenRegisterModal}
+                  className="text-start font-[700]"
+                />
+              </>
+            )}
           </div>
         </div>
       )}
