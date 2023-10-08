@@ -93,7 +93,7 @@ const LoginModal: React.FC<LoginModalProps> = () => {
         outline
         label="Continue with Google"
         icon={FcGoogle}
-        onClick={() => {}}
+        onClick={() => signIn('google')}
       />
       <Button
         outline
