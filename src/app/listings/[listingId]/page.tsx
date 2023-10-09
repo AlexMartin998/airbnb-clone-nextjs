@@ -23,6 +23,8 @@ const ListingPage: React.FC<pageProps> = async ({ params }) => {
       listing={listing}
       currentUser={currentUser}
     />
+
+    
   );
 };
 
