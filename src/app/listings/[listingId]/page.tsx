@@ -1,4 +1,4 @@
-import { getListingById } from '@/airbnb/actions';
+import { getListingById, getReservations } from '@/airbnb/actions';
 import { EmptyState } from '@/airbnb/components';
 import { getCurrentUser } from '@/auth/actions';
 import { ListingClient } from '../components';
@@ -16,15 +16,14 @@ const ListingPage: React.FC<pageProps> = async ({ params }) => {
   if (!listing) return <EmptyState />;
 
   const currentUser = await getCurrentUser();
-  // const reservations = await getReservations(params);
+  const reservations = await getReservations(params);
 
   return (
     <ListingClient
       listing={listing}
       currentUser={currentUser}
+      reservations={reservations}
     />
-
-    
   );
 };
 

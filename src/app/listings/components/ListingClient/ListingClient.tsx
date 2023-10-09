@@ -39,7 +39,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
   const [totalPrice, setTotalPrice] = useState(listing.price);
   const [dateRange, setDateRange] = useState<Range>(initialDateRange);
 
-  // disabled dates
+  // // disabled dates
   const disabledDates = useMemo(() => {
     let dates: Date[] = [];
 
@@ -60,7 +60,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
     return categories.find(items => items.label === listing.category);
   }, [listing.category]);
 
-  //
+  // // create reservation
   const onCreateReservation = useCallback(() => {
     if (!currentUser) return onOpenLoginModal();
     setIsLoading(true);
