@@ -1,3 +1,4 @@
+export { default as Calendar } from './Calendar/Calendar';
 export { default as CategoryInput } from './CategoryInput/CategoryInput';
 export { default as Counter } from './Counter/Counter';
 export { default as CountrySelect } from './CountrySelect/CountrySelect';
