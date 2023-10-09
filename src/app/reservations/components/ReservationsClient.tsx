@@ -1,12 +1,12 @@
 'use client';
 
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useCallback, useState } from 'react';
 import { toast } from 'react-hot-toast';
 
 import { ListingCard } from '@/airbnb/components';
 import { Container, Heading } from '@/shared/components';
+import { airbnbApi } from '@/shared/lib';
 import { SafeReservation, SafeUser } from '@/shared/types';
 
 interface ReservationsClientProps {
@@ -25,7 +25,7 @@ const ReservationsClient: React.FC<ReservationsClientProps> = ({
     (id: string) => {
       setDeletingId(id);
 
-      axios
+      airbnbApi
         .delete(`/reservations/${id}`)
         .then(() => {
           toast.success('Reservation cancelled');

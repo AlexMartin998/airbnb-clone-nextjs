@@ -44,6 +44,7 @@ const RegisterModal: React.FC<RegisterModalProps> = () => {
       .post('/auth/register', data)
       .then(() => {
         onClose();
+        onOpenLogin();
       })
       .catch(err => {
         toast.error(err?.response.data.error || 'Something went wrong');
