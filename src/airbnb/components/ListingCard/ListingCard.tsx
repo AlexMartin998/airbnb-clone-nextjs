@@ -71,6 +71,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
             className="object-cover h-full w-full group-hover:scale-110 transition"
             src={data.imageSrc}
             alt="Listing"
+            sizes='auto'
           />
 
           <div className="absolute top-3 right-3">

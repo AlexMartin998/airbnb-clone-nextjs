@@ -14,10 +14,16 @@ const HeartButton: React.FC<HeartButtonProps> = ({
   listingId,
   currentUser,
 }) => {
-  const { hasFavorited } = useFavorite({ listingId, currentUser });
+  const { hasFavorited, toggleFavorite } = useFavorite({
+    listingId,
+    currentUser,
+  });
 
   return (
-    <div className="relative hover:opacity-80 transition cursor-pointer">
+    <div
+      onClick={toggleFavorite}
+      className="relative hover:opacity-80 transition cursor-pointer"
+    >
       <AiOutlineHeart
         size={28}
         className="fill-white absolute -top-[2px] -right-[2px]"
