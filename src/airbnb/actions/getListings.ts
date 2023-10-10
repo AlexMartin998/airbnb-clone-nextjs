@@ -33,6 +33,7 @@ export const getListings = async (params: IListingsParams) => {
       };
     if (locationValue) query.locationValue = locationValue;
 
+    // omit dates already taken
     if (startDate && endDate)
       query.NOT = {
         reservations: {

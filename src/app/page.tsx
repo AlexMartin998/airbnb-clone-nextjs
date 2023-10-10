@@ -1,12 +1,18 @@
+import { NextPage } from 'next';
+
 import { getListings } from '@/airbnb/actions';
 import { EmptyState, ListingCard } from '@/airbnb/components';
 import { getCurrentUser } from '@/auth/actions';
 import { Container } from '@/shared/components';
+import { IListingsParams } from '@/shared/interfaces';
 
-export type pageProps = {};
+export type HomeProps = {
+  searchParams: IListingsParams;
+};
 
-const Home: React.FC<pageProps> = async () => {
-  const listings = await getListings({});
+// as a Server Component we can get url params as a Props
+const Home: NextPage<HomeProps> = async ({ searchParams }) => {
+  const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
 
   if (listings.length === 0) {
